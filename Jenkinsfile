@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_CREDS = credentials('DockerCreds')
+    }
     stages {
         stage('Build') {
             steps {
@@ -12,7 +15,7 @@ pipeline {
         stage('Push to HUB') {
             steps {
                 echo 'Pushing to docker hub ...'
-                sh "docker login -u rootxrishabh -p password"
+                sh "docker login -u rootxrishabh -p ${DOCKER_CREDS}"
                 sh "docker push rootxrishabh/AutoDeploy:${env.BUILD_NUMBER}.0"
                 echo 'Push completed' 
             }
@@ -27,7 +30,7 @@ pipeline {
                 sh "git config user.email 'risrock02@gmail.com'"
                 sh "git add ."
                 sh "git commit -m 'Jenkins build version ${env.BUILD_NUMBER}.0'"
-                sh "git config --local credential.helper '!f() { echo username=rootxrishabh; echo password=PAT; }; f'"
+                sh "git config --local credential.helper '!f() { echo username=rootxrishabh; echo password=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; }; f'"
                 sh "git push origin master"
                 echo 'Script Updated'   
             }
