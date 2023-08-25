@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Pushing to docker hub ...'
                 sh "docker login -u autodeploy -p password123"
-                sh "docker push autodeploy/autodeploy:${env.BUILD_NUMBER}.0"
+                sh "docker push autodeploy/autodeploy:1.0"
                 echo 'Push completed' 
             }
         }
