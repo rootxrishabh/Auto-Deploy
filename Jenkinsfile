@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the go application\'s docker image ...'
-                git 'https://github.com/rootxrishabh/AutoDeploy.git'
+                git 'https://github.com/rootxrishabh/Auto-Deploy.git'
                 sh "docker build -t rootxrishabh/Library-API-autodeploy:${env.BUILD_NUMBER}.0 ."
                 echo 'Your image has been built'
             }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Pushing to docker hub ...'
                 sh "docker login -u rootxrishabh -p ${DOCKER_CREDS}"
-                sh "docker push rootxrishabh/AutoDeploy:${env.BUILD_NUMBER}.0"
+                sh "docker push rootxrishabh/Auto-Deploy:${env.BUILD_NUMBER}.0"
                 echo 'Push completed' 
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Updating the deploying script ...'
                 git 'https://github.com/rootxrishabh/AutoDeploy-yaml.git'
-                sh "sed -i 's|image: rootxrishabh/AutoDeploy:.*|image: rootxrishabh/AutoDeploy:${env.BUILD_NUMBER}.0|' deployment.yaml"
+                sh "sed -i 's|image: rootxrishabh/Auto-Deploy:.*|image: rootxrishabh/Auto-Deploy:${env.BUILD_NUMBER}.0|' deployment.yaml"
                 sh "cat deployment.yaml"
                 sh "git config user.name 'rootxrishabh'"
                 sh "git config user.email 'risrock02@gmail.com'"
