@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Building the go application\'s docker image ...'
                 git 'https://github.com/rootxrishabh/Auto-Deploy'
-                sh "docker build -t autodeploy/autodeploy:${env.BUILD_NUMBER}.0 ."
+                sh "docker build -t autodeploy/autodeploy:1.0"
                 echo 'Your image has been built'
             }
         }
