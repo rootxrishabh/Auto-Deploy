@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_CREDS = credentials('DockerCreds')
-    }
     stages {
         stage('Build') {
             steps {
@@ -15,7 +12,7 @@ pipeline {
         stage('Push to HUB') {
             steps {
                 echo 'Pushing to docker hub ...'
-                sh "docker login -u rootxrishabh -p ${DOCKER_CREDS}"
+                sh "docker login -u rootxrishabh -p password"
                 sh "docker push rootxrishabh/Auto-Deploy:${env.BUILD_NUMBER}.0"
                 echo 'Push completed' 
             }
