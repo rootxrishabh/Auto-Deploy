@@ -1,6 +1,8 @@
 # Auto-Deploy
 
-This is an API which helps manage a library system. Deploy this application using a pipeline with the following commands below
+This is an API which helps manage a library system. Deploy this 
+application using a pipeline with the following commands below, note you 
+need docker installed for this on your PC
 
 # Step 1
 Build the docker image locally with the provided file.
